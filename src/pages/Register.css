@@ -1,0 +1,15 @@
+body{
+    background-color: #F9FAFB;
+}
+
+.container-register {
+  max-width: 100vh;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
