@@ -14,7 +14,10 @@ const Header = () => {
               <Link className="btn btn-outline-success" to="/">Início</Link>
             </li>
             <li className="nav-item">
-              <Link className="btn btn-outline-success" to="/cadastrar">Cadastrar Item</Link>
+              <Link className="btn btn-outline-success" to="/cadastrarTroca">Cadastrar Troca</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="btn btn-outline-success" to="/cadastrarItem">Cadastrar Item</Link>
             </li>
             <li className="nav-item">
               <Link className="btn btn-success" to="/login">Login</Link>
