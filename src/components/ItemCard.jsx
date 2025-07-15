@@ -8,7 +8,7 @@ const ItemCard = ({ item }) => {
         <div className="card-body">
           <h5 className="card-title">{item.title}</h5>
           <p className="card-text text-muted">{item.description}</p>
-          <small className="text-muted">{item.location}</small>
+          <small className="text-muted">{item.neighborhood} {item.city}</small>
         </div>
         <div className="card-footer bg-transparent border-top-0">
           <button className="btn btn-success w-100">Propor Troca</button>

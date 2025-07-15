@@ -2,7 +2,17 @@ import React, { useState, useEffect } from 'react';
 import ItemCard from '../components/ItemCard';
 
 const HomePage = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{
+      id: 0,
+      title: '',
+      description: '',
+      category: '',
+      owner: '',
+      neighborhood: '',
+      city: '',
+      interest: '',
+      imageUrl: '',
+    }]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
