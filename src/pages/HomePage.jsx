@@ -30,9 +30,9 @@ const HomePage = () => {
   }, []); 
 
   return (
-    <div className="container my-1 ">
+    <div className="container-fluid my-1">
       {}
-      <div className="row text-center mb-5 bg-success p-5 ">
+      <div className="row text-center mb-3 bg-success p-5">
         <div className="col-md-8 mx-auto">
           <h1 className="Display-4 fw-bold text-light"><strong>Conectando necessidades, transformando vidas.</strong></h1>
           <p className="lead text-light mb-5 ">

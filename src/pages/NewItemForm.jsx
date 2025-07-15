@@ -123,7 +123,7 @@ const NovoItemForm = () => {
 
           <div className="form-buttons">
             <button type="button" className="btn-cancelar">Cancelar</button>
-            <button type="submit" className="btn-publicar">Publicar Item</button>
+            <button type="submit" className="btn btn-success">Publicar Item</button>
           </div>
         </div>
       </form>

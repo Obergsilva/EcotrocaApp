@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logoEcotroca from '../assets/logo.png';
+
 
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
-        <Link className="navbar-brand" to="/" style={{ fontWeight: 'bold', color: '#28a745' }}>
-          Ecotroca
+        <img className='me-2' src={logoEcotroca} alt="Logo Ecotroca" style={{ width: '50px', height: '50px' }} />
+        <Link className="navbar-brand" to="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#198753' }}>
+          EcoTroca
         </Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ms-auto d-flex align-items-center gap-2">
