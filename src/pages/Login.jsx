@@ -1,4 +1,3 @@
-import SocialLogin from "../components/SocialLogin";
 import InputField from "../components/InputField";
 import './Login.css';
 
@@ -6,9 +5,6 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2 className="form-title">FAÇA SEU LOGIN</h2>
-      <SocialLogin />
-
-      <p className="separator"><span>ou</span></p>
 
       <form action="#" className="login-form">
         <InputField type="email" placeholder="Email" icon="mail" />
