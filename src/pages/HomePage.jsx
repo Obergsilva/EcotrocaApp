@@ -30,22 +30,34 @@ const HomePage = () => {
   }, []); 
 
   return (
-    <div className="container my-5">
+    <div className="container my-1 ">
       {}
-      <div className="row text-center mb-5">
+      <div className="row text-center mb-5 bg-success p-5 ">
         <div className="col-md-8 mx-auto">
-          <h1 className="display-4">Conectando necessidades, transformando vidas.</h1>
-          <p className="lead">
+          <h1 className="Display-4 fw-bold text-light"><strong>Conectando necessidades, transformando vidas.</strong></h1>
+          <p className="lead text-light mb-5 ">
             No Ecotroca, o que você não usa mais tem muito valor para outra pessoa.
-            Cadastre, encontre e troque objetos de forma simples e segura na sua comunidade.
+            Cadastre-se, encontre o que procura e faça trocas de forma simples e segura na sua comunidade.
           </p>
+          <input type="text" className="form-control" placeholder="O que você está procurando?" />
         </div>
       </div>
 
-      {}
-      <div className="row mb-4">
-        <div className="col-md-6 mx-auto">
-          <input type="text" className="form-control" placeholder="O que você está procurando?" />
+      <div className="row mb-5 gx-3 align-items-center">
+        <label className="col-md-auto col-form-label">Categoria:</label>
+        <div className="col-md-3">
+          <select className="form-select">
+            <option value="">Todas</option>
+            <option value="eletrônicos">Eletrônicos</option>
+            <option value="móveis">Móveis</option>
+            <option value="roupas">Roupas</option>
+            <option value="brinquedos">Brinquedos</option>
+          </select>
+        </div>
+        
+        <label className="col-md-auto col-form-label">Localização:</label>
+        <div className="col-md-4">
+          <input type="text" className="form-control" placeholder="Digite o bairro..." />
         </div>
       </div>
 
