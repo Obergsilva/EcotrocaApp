@@ -1,43 +1,47 @@
 {
   "items": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Carrinho de Bebê Usado",
       "description": "Carrinho de bebê em ótimo estado, usado por 1 ano. Ideal para passeios.",
       "category": "Brinquedos",
       "owner": "Ana",
       "neighborhood": "Bairro Meireles",
       "city": "Fortaleza-Ce",
+      "publishedDate": "15/01/2025",
       "imageUrl": "https://d296pbmv9m7g8v.cloudfront.net/Custom/Content/Products/10/72/1072711_carrinho-de-bebe-tutti-baby-bolt-10018001-passeio-e-berco-guia-reversivel-10010855_m9_638642597971619875.webp"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Kit de Roupas (3-6 meses)",
       "description": "Lote de roupas de bebê, incluindo bodies, calças e macacões. Pouco uso.",
       "category": "Roupas",
       "owner": "Ana",
       "neighborhood": "Bairro Piratininga",
       "city": "Maracanaú-Ce",
+      "publishedDate": "20/02/2025",
       "imageUrl": "https://images.tcdn.com.br/img/img_prod/767400/kit_roupas_de_bebe_38_pecas_enxoval_completo_menino_e_menina_945_1_231d581d1803b4220f6aeb58340f2ed8_20211125233351.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Bicicleta Infantil Aro 12",
       "description": "Bicicleta para crianças de 3 a 5 anos. Precisa de pequenos reparos no pneu.",
       "category": "Brinquedos",
       "owner": "Carlos",
       "neighborhood": "Centro",
       "city": "Fortaleza-Ce",
+      "publishedDate": "05/03/2025",
       "imageUrl": "https://images.tcdn.com.br/img/img_prod/1249101/bicicleta_infantil_aro_12_nathor_violet_43532997_1_8fc9c7a7942d119c29a9024bdc9c0b20.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Cadeira de Alimentação",
       "description": "Cadeira de alimentação portátil e fácil de limpar. Perfeita para o dia a dia.",
       "category": "Acessórios",
       "owner": "Mariana",
       "neighborhood": "Bairro Messejana",
       "city": "Fortaleza-Ce",
+      "publishedDate": "10/06/2025",
       "imageUrl": "https://a-static.mlcdn.com.br/1500x1500/cadeira-de-alimentacao-bebe-portatil-zest-maxi-baby/planetadobebe/21466/8db79400effdc0f4aafb1287206120f6.jpeg"
     }
   ]

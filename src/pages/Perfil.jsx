@@ -2,18 +2,27 @@ import React from "react";
 import "./Perfil.css";
 import { Link } from "react-router-dom";
 
+
 const Perfil = () => {
+  const user = {
+    id: 1,
+    name: "Ana",
+    email: "ana@example.com",
+    city: "Fortaleza-Ce",
+    neighborhood: "Bairro Meireles",
+    imageUrl: "https://img.myloview.com.br/fotomurais/desenho-de-rosto-de-mulher-bonita-700-148662415.jpg"
+  };
+
   return (
     <div className="perfil-container">
-      <div className="voltar">← Voltar</div>
       <h1 className="titulo">Meu Perfil</h1>
 
       <div className="perfil-card">
         <div className="usuario-info">
-          <div className="avatar">👤</div>
+          <img className="avatar" src={user.imageUrl} alt={user.name}  />
           <div>
-            <div className="nome">Usuário</div>
-            <div className="email">📍 ,<br />erika@gmail</div>
+            <div className="nome">{user.name}</div>
+            <div className="email">📍 {user.neighborhood},<br />{user.email}</div>
           </div>
         </div>
       </div>

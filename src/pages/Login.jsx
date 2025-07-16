@@ -4,7 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const Login = () => {
   return (
-    <div className="login-container">
+    <div className="login-container my-4">
       <h2 className="form-title">FAÇA SEU LOGIN</h2>
 
       <form action="#" className="login-form">
@@ -18,7 +18,7 @@ const Login = () => {
         <a href="#" className="forgot-password-link">Esqueceu a senha?</a>
 
       <p className="signup-prompt">
-        Não tem uma conta? <a href="/cadastrarUsuario" className="signup-link">Cadastre-se</a>
+        Não tem uma conta? <a href="/cadastrarUsuario" className="signup-link"><strong>Cadastre-se</strong></a>
       </p>
     </div>
   )
