@@ -28,10 +28,6 @@ O EcotrocaApp é uma aplicação web desenvolvida em React que conecta pessoas i
 
   - JSON Server (para simulação de API)
 
-- **Testes:**
-  - Jest
-  - React Testing Library
-
 ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
@@ -70,38 +66,6 @@ npm start
 
 A aplicação será aberta automaticamente em `http://localhost:3000`
 
-## 📁 Estrutura do Projeto
-
-```
-EcotrocaApp/
-├── public/                 # Arquivos públicos
-├── src/
-│   ├── components/         # Componentes reutilizáveis
-│   │   ├── Footer.jsx
-│   │   ├── Header.jsx
-│   │   ├── InputField.jsx
-│   │   └── ItemCard.jsx
-│   ├── pages/             # Páginas da aplicação
-│   │   ├── HomePage.jsx
-│   │   ├── ItemDetail.jsx
-│   │   ├── Login.jsx
-│   │   ├── NewItemForm.jsx
-│   │   ├── Perfil.jsx
-│   │   └── RegisterUser.jsx
-│   ├── assets/            # Imagens e recursos
-│   ├── App.jsx            # Componente principal
-│   └── index.js           # Ponto de entrada
-├── db.json                # Base de dados simulada
-└── package.json           # Dependências e scripts
-```
-
-## 🔧 Scripts Disponíveis
-
-- `npm start` - Inicia a aplicação em modo de desenvolvimento
-- `npm run build` - Gera a build de produção
-- `npm test` - Executa os testes
-- `npm run server` - Inicia o servidor JSON na porta 3001
-
 ## 🌐 Rotas da Aplicação
 
 - `/` - Página inicial com listagem de itens
@@ -111,22 +75,6 @@ EcotrocaApp/
 - `/perfil` - Página do perfil do usuário
 - `/item/:id` - Detalhes específicos de um item
 
-## 📊 API Endpoints (JSON Server)
-
-- `GET /items` - Lista todos os itens
-- `POST /items` - Cria um novo item
-- `GET /items/:id` - Busca um item específico
-- `PUT /items/:id` - Atualiza um item
-- `DELETE /items/:id` - Remove um item
-
-## 🎯 Funcionalidades Futuras
-
-- [ ] Sistema de mensagens entre usuários
-- [ ] Filtros avançados de busca
-- [ ] Geolocalização para encontrar itens próximos
-- [ ] Sistema de avaliações
-- [ ] Notificações em tempo real
-- [ ] Upload de múltiplas imagens por item
 
 ## 🤝 Como Contribuir
 
@@ -140,17 +88,13 @@ EcotrocaApp/
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
+## 👤 Orientadores
+- **Fernanda Nascimento** - [GitHub]([https://github.com/Obergsilva](https://github.com/FernandaNascimento26))
+- **Luiz Carlos** - [GitHub]([https://github.com/Obergsilva](https://github.com/LuizGup))
+
 ## 👥 Autores
 
 - **Francisco Gutemberg** - [GitHub](https://github.com/Obergsilva)
 - **Keyse Paulo** - [GitHub](https://github.com/keysepaulo)
 - **Erika Mayara** - [GitHub](https://github.com/erikapimentel-dev)
 - **Heloisa Rodrigues** - [GitHub](https://github.com/hisarod)
-
-## 📞 Contato
-
-Se você tiver alguma dúvida sobre o projeto, sinta-se à vontade para entrar em contato!
-
----
-
-⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!
