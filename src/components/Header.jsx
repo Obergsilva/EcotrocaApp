@@ -20,7 +20,10 @@ const Header = () => {
               <Link className="btn btn-outline-success" to="/cadastrarItem">Cadastrar Item</Link>
             </li>
             <li className="nav-item">
-              <Link className="btn btn-success" to="/login">Login</Link>
+              <Link className="btn btn-outline-success" to="/perfil">Perfil</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="btn btn-outline-success" to="/login">Login</Link>
             </li>
           </ul>
         </div>
