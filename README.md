@@ -1,74 +1,156 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# EcotrocaApp 🌱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Uma plataforma de troca sustentável onde usuários podem compartilhar e trocar itens, promovendo o consumo consciente e a reutilização de produtos.
 
-## Available Scripts
+## 📋 Sobre o Projeto
 
-In the project directory, you can run:
+O EcotrocaApp é uma aplicação web desenvolvida em React que conecta pessoas interessadas em trocar itens ao invés de descartá-los. A plataforma promove a sustentabilidade através da economia circular, permitindo que objetos tenham uma segunda vida útil.
 
-### `npm start`
+### ✨ Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🏠 **Página Inicial**: Visualização de todos os itens disponíveis para troca
+- 🔐 **Sistema de Autenticação**: Login e cadastro de usuários
+- 📦 **Cadastro de Itens**: Adicione itens que você deseja trocar
+- 👤 **Perfil do Usuário**: Gerencie suas informações pessoais
+- 🔍 **Detalhes do Item**: Visualize informações completas de cada item
+- 📱 **Design Responsivo**: Interface adaptada para diferentes dispositivos
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tecnologias Utilizadas
 
-### `npm test`
+- **Frontend:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - React 19.1.0
+  - React Router DOM 7.6.3
+  - Bootstrap 5.3.7
+  - Bootstrap Icons 1.13.1
 
-### `npm run build`
+- **Backend/Dados:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - JSON Server (para simulação de API)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Testes:**
+  - Jest
+  - React Testing Library
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Como Executar o Projeto
 
-### `npm run eject`
+### Pré-requisitos
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js (versão 14 ou superior)
+- npm ou yarn
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Instalação
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone o repositório:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/Obergsilva/EcotrocaApp.git
+cd EcotrocaApp
+```
 
-## Learn More
+2. Instale as dependências:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Inicie o servidor JSON (backend simulado):
 
-### Code Splitting
+```bash
+npm run server
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+O servidor será executado em `http://localhost:3001`
 
-### Analyzing the Bundle Size
+4. Em outro terminal, inicie a aplicação React:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+A aplicação será aberta automaticamente em `http://localhost:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📁 Estrutura do Projeto
 
-### Advanced Configuration
+```
+EcotrocaApp/
+├── public/                 # Arquivos públicos
+├── src/
+│   ├── components/         # Componentes reutilizáveis
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── InputField.jsx
+│   │   └── ItemCard.jsx
+│   ├── pages/             # Páginas da aplicação
+│   │   ├── HomePage.jsx
+│   │   ├── ItemDetail.jsx
+│   │   ├── Login.jsx
+│   │   ├── NewItemForm.jsx
+│   │   ├── Perfil.jsx
+│   │   └── RegisterUser.jsx
+│   ├── assets/            # Imagens e recursos
+│   ├── App.jsx            # Componente principal
+│   └── index.js           # Ponto de entrada
+├── db.json                # Base de dados simulada
+└── package.json           # Dependências e scripts
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🔧 Scripts Disponíveis
 
-### Deployment
+- `npm start` - Inicia a aplicação em modo de desenvolvimento
+- `npm run build` - Gera a build de produção
+- `npm test` - Executa os testes
+- `npm run server` - Inicia o servidor JSON na porta 3001
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🌐 Rotas da Aplicação
 
-### `npm run build` fails to minify
+- `/` - Página inicial com listagem de itens
+- `/login` - Página de login
+- `/cadastrarUsuario` - Cadastro de novos usuários
+- `/cadastrarItem` - Formulário para adicionar novos itens
+- `/perfil` - Página do perfil do usuário
+- `/item/:id` - Detalhes específicos de um item
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# EcotrocaApp
->>>>>>> 56477a8dcd6e3d91606cc396872e5158feda8d10
+## 📊 API Endpoints (JSON Server)
+
+- `GET /items` - Lista todos os itens
+- `POST /items` - Cria um novo item
+- `GET /items/:id` - Busca um item específico
+- `PUT /items/:id` - Atualiza um item
+- `DELETE /items/:id` - Remove um item
+
+## 🎯 Funcionalidades Futuras
+
+- [ ] Sistema de mensagens entre usuários
+- [ ] Filtros avançados de busca
+- [ ] Geolocalização para encontrar itens próximos
+- [ ] Sistema de avaliações
+- [ ] Notificações em tempo real
+- [ ] Upload de múltiplas imagens por item
+
+## 🤝 Como Contribuir
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👥 Autores
+
+- **Francisco Gutemberg** - [GitHub](https://github.com/Obergsilva)
+- **Keyse Paulo** - [GitHub](https://github.com/keysepaulo)
+- **Erika Mayara** - [GitHub](https://github.com/erikapimentel-dev)
+- **Heloisa Rodrigues** - [GitHub](https://github.com/hisarod)
+
+## 📞 Contato
+
+Se você tiver alguma dúvida sobre o projeto, sinta-se à vontade para entrar em contato!
+
+---
+
+⭐ Se este projeto foi útil para você, considere dar uma estrela no repositório!

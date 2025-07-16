@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 
 const ItemCard = ({ item }) => {
   return (
@@ -11,7 +13,7 @@ const ItemCard = ({ item }) => {
           <small className="text-muted">{item.neighborhood} {item.city}</small>
         </div>
         <div className="card-footer bg-transparent border-top-0">
-          <button className="btn btn-success w-100">Propor Troca</button>
+          <Link to={`/item/${item.id}`} className="btn btn-success w-100">Detalhe do Item</Link>
         </div>
       </div>
     </div>
