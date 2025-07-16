@@ -142,7 +142,10 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👥 Autores
 
-- **Obergsilva** - _Desenvolvimento inicial_ - [GitHub](https://github.com/Obergsilva)
+- **Francisco Gutemberg** - _Desenvolvimento inicial_ - [GitHub](https://github.com/Obergsilva)
+- **Keyse Paulo** - _Desenvolvimento inicial_ - [GitHub](https://github.com/keysepaulo)
+- **Erika Mayara** - _Desenvolvimento inicial_ - [GitHub](https://github.com/erikapimentel-dev)
+- **Heloisa Rodrigues** - _Desenvolvimento inicial_ - [GitHub](https://github.com/hisarod)
 
 ## 📞 Contato
 
