@@ -1,0 +1,30 @@
+:root {
+  --reseda-green: #6C7A49;
+  --fern-green: #4F7942;
+  --dark-moss: #4A5D23;
+  --pakistan-green: #245501;
+  --dark-green: #013220;
+}
+
+.btn-reseda {
+  background-color: var(--reseda-green);
+  color: #fff;
+  border: none;
+}
+
+.btn-reseda:hover {
+  background-color: var(--fern-green);
+}
+
+.navbar-custom {
+  background-color: var(--dark-moss);
+}
+
+.navbar-custom .nav-link,
+.navbar-custom .btn {
+  color: #fff;
+}
+
+.navbar-custom .nav-link:hover {
+  color: var(--reseda-green);
+}
