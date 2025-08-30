@@ -1,22 +1,20 @@
-import { PrismaClient } from '@prisma/client'
+import express from 'express';
+import { PrismaClient } from '@prisma/client';
+import usuariosRoutes from './routes/usuarios.js';
 
-const prisma = new PrismaClient()
+const express = require('express');
+const app = express();
+const rotas = require('./routes/routes');
+const prisma = new PrismaClient();
 
-async function main() {
-  // Criar um usuário
-  const novoUsuario = await prisma.Usuario.create({
-    data: {
-      nomeCompleto: "Gutemberg",
-      email: "gutemberg@example.com",
-      senhaHash: "senha123",
-      cidade: "Fortaleza",
-      bairro: "Fátima"
-    }
-  })
+app.use(express.json());
+app.use('/api', rotas);
 
-  console.log("Usuário criado:", novoUsuario)
-}
+// Endpoint teste
+app.get('/', (req, res) => {
+  res.send('API rodando...');
+});
 
-main()
-  .catch(e => console.error(e))
-  .finally(async () => await prisma.$disconnect())
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});
