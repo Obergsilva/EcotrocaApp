@@ -26,7 +26,7 @@ O EcotrocaApp é uma aplicação web desenvolvida em React que conecta pessoas i
 
 - **Backend/Dados:**
 
-  - JSON Server (para simulação de API)
+  - Server
 
 ## 🚀 Como Executar o Projeto
 
@@ -47,13 +47,19 @@ cd EcotrocaApp
 2. Instale as dependências:
 
 ```bash
+cd backend
 npm install
+cd ..
+cd frontend
+npm install
+cd ..
 ```
 
-3. Inicie o servidor JSON (backend simulado):
+3. Inicie o servidor:
 
 ```bash
-npm run server
+cd backend
+node src/server.js
 ```
 
 O servidor será executado em `http://localhost:3001`
@@ -61,6 +67,7 @@ O servidor será executado em `http://localhost:3001`
 4. Em outro terminal, inicie a aplicação React:
 
 ```bash
+cd frontend
 npm start
 ```
 
