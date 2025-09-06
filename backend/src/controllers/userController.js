@@ -1,8 +1,8 @@
-const {getAllUsuarios, getUsuarioById, addUsuario, updateUsuario, deleteUsuario} = require('../models/usuarioModel');
+const {getAllUsers, getUserById, addUser, updateUser, deleteUser} = require('../models/userModel');
 
-const getAllUsuariosHandler = async(req, res) =>{
+const getAllUsersHandler = async(req, res) =>{
     try{
-        const usuarios = await getAllUsuarios();
+        const usuarios = await getAllUsers();
         res.status(200).json(usuarios);
     }
 
@@ -12,11 +12,11 @@ const getAllUsuariosHandler = async(req, res) =>{
 
 }
 
-const getUsuarioByIdHandler = async(req, res) => {
+const getUserByIdHandler = async(req, res) => {
     const id = parseInt(req.params.id);
 
     try{
-        const usuario = await getUsuarioById(id);
+        const usuario = await getUserById(id);
 
         if(!usuario){
             return res.status(404).json({error: "Usuário não encontrado"});
@@ -30,7 +30,7 @@ const getUsuarioByIdHandler = async(req, res) => {
     }   
 }
 
-const addUsuarioHandler = async(req, res) => {
+const addUserHandler = async(req, res) => {
 
     const{nomeCompleto, email, senhaHash, cidade, bairro} = req.body;
 
@@ -39,7 +39,7 @@ const addUsuarioHandler = async(req, res) => {
     }
 
     try{
-        const usuario = await addUsuario(nomeCompleto, email, senhaHash, cidade, bairro);
+        const usuario = await addUser(nomeCompleto, email, senhaHash, cidade, bairro);
         res.status(201).json(usuario);
     }
 
@@ -49,7 +49,7 @@ const addUsuarioHandler = async(req, res) => {
 
 }
 
-const updateUsuarioHandler = async(req, res) => {
+const updateUserHandler = async(req, res) => {
 
     const id_usuario = parseInt(req.params.id);
 
@@ -59,8 +59,12 @@ const updateUsuarioHandler = async(req, res) => {
         return res.status(400).json({error: "Nome completo é obrigatório"});
     }
 
+    if(!email){
+        return res.status(400).json({error: "email é obrigatório"});
+    }
+
     try{
-        const usuario  = await updateUsuario(id_usuario, nomeCompleto, email, senhaHash, cidade, bairro);
+        const usuario  = await updateUser(id_usuario, nomeCompleto, email, senhaHash, cidade, bairro);
 
         res.status(200).json(usuario);
     }
@@ -73,11 +77,11 @@ const updateUsuarioHandler = async(req, res) => {
     }
 }
 
-const deleteUsuarioHandler = async(req, res) => {
+const deleteUserHandler = async(req, res) => {
     const id_usuario = parseInt(req.params.id);
 
     try{
-        const usuario = await deleteUsuario(id_usuario);
+        const usuario = await deleteUser(id_usuario);
         res.status(200).json({message: "Usuário deletado com sucesso"});
     }
 
@@ -91,9 +95,11 @@ const deleteUsuarioHandler = async(req, res) => {
 
 
 module.exports = {
-    getAllUsuariosHandler,
-    getUsuarioByIdHandler,
-    addUsuarioHandler,
-    updateUsuarioHandler,
-    deleteUsuarioHandler
+    getAllUsersHandler,
+    getUserByIdHandler,
+    addUserHandler,
+    updateUserHandler,
+    deleteUserHandler
 };
+
+
