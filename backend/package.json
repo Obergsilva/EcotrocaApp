@@ -5,5 +5,10 @@
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "express": "^5.1.0"
+  },
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "prisma": "prisma"
   }
 }
