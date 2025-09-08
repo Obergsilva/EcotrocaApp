@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const usuarioRoutes = require('./routes/userRoutes');
+const usuarioRoutes = require('./routes/user');
 const itemRoutes = require('./routes/item'); 
+const categoriaRoutes = require('./routes/categoria');
 
 app.use(express.json());
 
@@ -17,5 +18,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', usuarioRoutes);
 app.use('/api/items', itemRoutes);
+app.use('/api/categorias', categoriaRoutes);
 
 module.exports = app;

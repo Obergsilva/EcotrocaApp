@@ -44,7 +44,7 @@ const addUserHandler = async(req, res) => {
     }
 
     catch(error){
-        res.status(500).json({error: error.message});
+        res.status(500).json({error: error.message || "Erro ao adicionar usuário"});
     }
 
 }
@@ -84,7 +84,7 @@ const deleteUserHandler = async(req, res) => {
         const usuario = await deleteUser(id_usuario);
         res.status(200).json({message: "Usuário deletado com sucesso"});
     }
-
+    
     catch(error){
         if(error.message === 'Usuário não encontrado'){
             return res.status(404).json({error: "Usuário não encontrado"});
