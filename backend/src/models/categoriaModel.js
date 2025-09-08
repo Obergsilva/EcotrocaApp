@@ -4,6 +4,9 @@ const getAllCategorias = () => {
     return prisma.categoria.findMany({
         orderBy: {
             id: 'asc'
+        },
+        include: {
+            itens: true
         }
     });
 }
@@ -12,6 +15,9 @@ const getCategoriaById = async(id_categoria) => {
     return prisma.categoria.findUnique({
         where: {
             id: id_categoria
+        },
+        include: {
+            itens: true
         }
     });
 }

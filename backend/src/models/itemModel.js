@@ -3,7 +3,12 @@ const prisma = require('../prisma'); // importa o PrismaClient
 // Pegar todos os itens
 const getAllItems = () => {
     return prisma.item.findMany({
-        include: { dono: true, categoria: true },
+        include: { 
+            dono: true, 
+            categoria: true,
+            propostasOfertadas: true,
+            propostasDesejadas: true
+         },
         orderBy: { id: 'asc' }
     });
 }
@@ -12,7 +17,12 @@ const getAllItems = () => {
 const getItemById = (id_item) => {
     return prisma.item.findUnique({
         where: { id: id_item },
-        include: { dono: true, categoria: true }
+        include: { 
+            dono: true, 
+            categoria: true, 
+            propostasOfertadas: true,
+            propostasDesejadas: true 
+        }
     });
 }
 

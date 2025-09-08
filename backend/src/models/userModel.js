@@ -4,6 +4,10 @@ const getAllUsers = () => {
     return prisma.usuario.findMany({
         orderBy: {
             id: 'asc'
+        },
+        include: {
+            itens: true,
+            propostas: true
         }
     });
 }
@@ -12,6 +16,10 @@ const getUserById = async(id_usuario) => {
     return prisma.usuario.findUnique({
         where: {
             id: id_usuario
+        },
+        include: {
+            itens: true,
+            propostas: true
         }
     });
 }
