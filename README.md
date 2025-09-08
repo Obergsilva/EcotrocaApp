@@ -21,12 +21,16 @@ O EcotrocaApp é uma aplicação web desenvolvida em React que conecta pessoas i
 
   - React 19.1.0
   - React Router DOM 7.6.3
+  - vite 7.1.2
   - Bootstrap 5.3.7
   - Bootstrap Icons 1.13.1
+  - Axios
 
-- **Backend/Dados:**
+- **Backend:**
 
-  - Server
+  - prisma 6.15.0
+  - cors 2.8.5
+  - express 5.1.0
 
 ## 🚀 Como Executar o Projeto
 
@@ -40,11 +44,53 @@ O EcotrocaApp é uma aplicação web desenvolvida em React que conecta pessoas i
 1. Clone o repositório:
 
 ```bash
+# Clonar o repositório principal
 git clone https://github.com/Obergsilva/EcotrocaApp.git
+
+# Entrar na pasta EcotrocaApp
 cd EcotrocaApp
 ```
 
-2. Instale as dependências:
+2. Criar o banco de dados:
+
+```bash
+CREATE DATABASE nome_do_banco;
+
+```
+
+3. Criar e configurar o arquivo .env do backend:
+
+```bash
+DATABASE_URL="postgresql://<usuario>:<senha>@localhost:5432/<nome_do_banco>?schema=public"
+
+```
+
+4. Criar e configurar o arquivo .env do frontend:
+
+```bash
+VITE_API_URL=http://localhost:3001/api
+
+```
+
+5. Gerar o cliente Prisma
+
+```bash
+npx prisma generate
+```
+
+6. Executar as migrações
+
+```bash
+npx prisma migrate dev --name init
+```
+
+7. Popular o banco automaticamente
+
+```bash
+npx prisma db seed
+```
+
+8. Instale as dependências:
 
 ```bash
 cd backend
@@ -55,23 +101,23 @@ npm install
 cd ..
 ```
 
-3. Inicie o servidor:
+9. Inicie o servidor:
 
 ```bash
 cd backend
-node src/server.js
+npm start
 ```
 
 O servidor será executado em `http://localhost:3001`
 
-4. Em outro terminal, inicie a aplicação React:
+10. Em outro terminal, inicie a aplicação React:
 
 ```bash
 cd frontend
 npm start
 ```
 
-A aplicação será aberta automaticamente em `http://localhost:3000`
+A aplicação será aberta automaticamente em `http://localhost:5173`
 
 ## 🌐 Rotas da Aplicação
 
@@ -81,7 +127,6 @@ A aplicação será aberta automaticamente em `http://localhost:3000`
 - `/cadastrarItem` - Formulário para adicionar novos itens
 - `/perfil` - Página do perfil do usuário
 - `/item/:id` - Detalhes específicos de um item
-
 
 ## 🤝 Como Contribuir
 
@@ -96,8 +141,9 @@ A aplicação será aberta automaticamente em `http://localhost:3000`
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 👤 Orientadores
-- **Fernanda Nascimento** - [GitHub]([https://github.com/Obergsilva](https://github.com/FernandaNascimento26))
-- **Luiz Carlos** - [GitHub]([https://github.com/Obergsilva](https://github.com/LuizGup))
+
+- **Fernanda Nascimento** - [GitHub](<[https://github.com/Obergsilva](https://github.com/FernandaNascimento26)>)
+- **Luiz Carlos** - [GitHub](<[https://github.com/Obergsilva](https://github.com/LuizGup)>)
 
 ## 👥 Autores
 
