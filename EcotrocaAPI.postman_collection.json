@@ -8,7 +8,141 @@
 	"item": [
 		{
 			"name": "usuarios",
-			"item": []
+			"item": [
+				{
+					"name": "getAllUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsuarioById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUsuario",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomeCompleto\": \"Ana Luisa\",\n  \"email\": \"ana.luisa@email.com\",\n  \"senhaHash\": \"senhaSuperSecreta123\",\n  \"cidade\": \"Fortaleza\",\n  \"bairro\": \"Montese\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUsuario",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/users/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUsuario",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomeCompleto\": \"João Francisco\",\n  \"email\": \"joao.francisco@email.com\",\n  \"senhaHash\": \"senhaSuperSecreta123\",\n  \"cidade\": \"Fortaleza\",\n  \"bairro\": \"Messejana\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/users/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "itens",
@@ -38,7 +172,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3001/api/items/3",
+							"raw": "localhost:3001/api/items/2",
 							"host": [
 								"localhost"
 							],
@@ -46,7 +180,7 @@
 							"path": [
 								"api",
 								"items",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -330,7 +464,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"mensagem\":\"Gostaria de trocar seu item por uma blusa?\",\n    \"autorId\": 1,\n    \"itemOfertadoId\": 1,\n    \"itemDesejadoId\": 3 \n}",
+							"raw": "{\n    \"mensagem\":\"Gostaria de trocar seu livro de Biologia por uma camisa linda?\",\n    \"autorId\": 1,\n    \"itemOfertadoId\": 3,\n    \"itemDesejadoId\": 2 \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,7 +492,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"mensagem\":\"Gostaria de trocar seu item por um livro?\",\n    \"autorId\": 1,\n    \"itemOfertadoId\": 1,\n    \"itemDesejadoId\": 3 \n}",
+							"raw": "{\n    \"mensagem\":\"Gostaria de trocar seu livro de Biologia por uma camisa linda, incrível?\",\n    \"autorId\": 1,\n    \"itemOfertadoId\": 3,\n    \"itemDesejadoId\": 2 \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,7 +500,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3001/api/propostas/1",
+							"raw": "localhost:3001/api/propostas/5",
 							"host": [
 								"localhost"
 							],
@@ -374,14 +508,14 @@
 							"path": [
 								"api",
 								"propostas",
-								"1"
+								"5"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteItem",
+					"name": "deleteProposta",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -390,7 +524,7 @@
 							"raw": "{\n  \"nome\": \"Roupas\",\n  \"descricao\": \"\"\n}"
 						},
 						"url": {
-							"raw": "localhost:3001/api/propostas/3",
+							"raw": "localhost:3001/api/propostas/4",
 							"host": [
 								"localhost"
 							],
@@ -398,146 +532,13 @@
 							"path": [
 								"api",
 								"propostas",
-								"3"
+								"4"
 							]
 						}
 					},
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "getAllUsuarios",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3001/api/users",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getUsuarioById",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/users/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"users",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "addUsuario",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nomeCompleto\": \"Ana Luisa\",\n  \"email\": \"ana.luisa@email.com\",\n  \"senhaHash\": \"senhaSuperSecreta123\",\n  \"cidade\": \"Fortaleza\",\n  \"bairro\": \"Montese\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/users/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"users",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteUsuario",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/users/4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"users",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateUsuario",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nomeCompleto\": \"João Francisco\",\n  \"email\": \"joao.francisco@email.com\",\n  \"senhaHash\": \"senhaSuperSecreta123\",\n  \"cidade\": \"Fortaleza\",\n  \"bairro\": \"Messejana\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/users/5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"users",
-						"5"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
