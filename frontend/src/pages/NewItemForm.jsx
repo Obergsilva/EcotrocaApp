@@ -4,20 +4,23 @@ import './NewItemForm.css';
 const NovoItemForm = () => {
   const [formData, setFormData] = useState({
     id: 0,
-    title: '',
-    description: '',
-    category: '',
-    owner: '',
-    neighborhood: '',
-    city: '',
-    interest: '',
-    imageUrl: '',
+    descricao: '',
+    usuarioId: 0,
+    bairro: '',
+    categoriaId: 0,
+    cidade: '',
+    dataPublicacao: '',
+    enderecoRetirada: '',
+    estadoConservacao: '',
+    status: '',
+    titulo: '',
+    urlImagem: ''
   });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'foto') {
-      setFormData({ ...formData, foto: files[0] });
+      setFormData({ ...formData, urlImagem: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -51,9 +54,9 @@ const NovoItemForm = () => {
             Nome do Item* <br />
             <input
               type="text"
-              name="nome"
+              name="titulo"
               placeholder="Ex: Camiseta Vintage Tamanho M"
-              value={formData.title}
+              value={formData.titulo}
               onChange={handleChange}
               required
             />
@@ -64,7 +67,7 @@ const NovoItemForm = () => {
             <textarea
               name="descricao"
               placeholder="Descreva o estado de conservação, tempo de uso..."
-              value={formData.description}
+              value={formData.descricao}
               onChange={handleChange}
               required
             />
@@ -73,16 +76,16 @@ const NovoItemForm = () => {
           <label>
             Categoria* <br />
             <select
-              name="categoria"
-              value={formData.category}
+              name="categoriaId"
+              value={formData.categoriaId}
               onChange={handleChange}
               required
             >
               <option value="">Selecione uma categoria</option>
-              <option value="Roupas">Roupas</option>
-              <option value="Eletrônicos">Eletrônicos</option>
-              <option value="Livros">Livros</option>
-              <option value="Outros">Outros</option>
+              <option value="1">Eletrônicos</option>
+              <option value="2">Livros</option>
+              <option value="3">Roupas</option>
+              <option value="4">Outros</option>
             </select>
           </label>
 
@@ -92,7 +95,7 @@ const NovoItemForm = () => {
               type="text"
               name="cidade"
               placeholder="Ex: Quixadá"
-              value={formData.city}
+              value={formData.cidade}
               onChange={handleChange}
               required
             />
@@ -104,20 +107,33 @@ const NovoItemForm = () => {
               type="text"
               name="bairro"
               placeholder="Ex: Carrascal"
-              value={formData.neighborhood}
+              value={formData.bairro}
               onChange={handleChange}
               required
             />
           </label>
 
           <label>
-            Interesses para Troca (opcional) <br />
+            Estado de Conservação* <br />
             <input
               type="text"
-              name="interesses"
-              placeholder="Ex: Livros, Eletrônicos..."
-              value={formData.interest}
+              name="estadoConservacao"
+              placeholder="Ex: Bom"
+              value={formData.estadoConservacao}
               onChange={handleChange}
+              required
+            />
+          </label>
+
+          <label>
+            Endereço da Retirada* <br />
+            <input
+              type="text"
+              name="enderecoRetirada"
+              placeholder="Ex: Rua X"
+              value={formData.enderecoRetirada}
+              onChange={handleChange}
+              required
             />
           </label>
 
