@@ -51,46 +51,7 @@ git clone https://github.com/Obergsilva/EcotrocaApp.git
 cd EcotrocaApp
 ```
 
-2. Criar o banco de dados:
-
-```bash
-CREATE DATABASE nome_do_banco;
-
-```
-
-3. Criar e configurar o arquivo .env do backend:
-
-```bash
-DATABASE_URL="postgresql://<usuario>:<senha>@localhost:5432/<nome_do_banco>?schema=public"
-
-```
-
-4. Criar e configurar o arquivo .env do frontend:
-
-```bash
-VITE_API_URL=http://localhost:3001/api
-
-```
-
-5. Gerar o cliente Prisma
-
-```bash
-npx prisma generate
-```
-
-6. Executar as migrações
-
-```bash
-npx prisma migrate dev --name init
-```
-
-7. Popular o banco automaticamente
-
-```bash
-npx prisma db seed
-```
-
-8. Instale as dependências:
+2. Instale as dependências:
 
 ```bash
 cd backend
@@ -99,6 +60,48 @@ cd ..
 cd frontend
 npm install
 cd ..
+```
+
+3. Criar o banco de dados:
+
+```bash
+CREATE DATABASE nome_do_banco;
+
+```
+
+4. Criar e configurar o arquivo .env do backend:
+
+```bash
+DATABASE_URL="postgresql://<usuario>:<senha>@localhost:5432/<nome_do_banco>?schema=public"
+
+```
+
+5. Criar e configurar o arquivo .env do frontend:
+
+```bash
+VITE_API_URL=http://localhost:3001/api
+
+```
+
+6. Gerar o cliente Prisma
+
+```bash
+cd backend
+npx prisma generate
+```
+
+7. Executar as migrações
+
+```bash
+cd backend
+npx prisma migrate dev --name init
+```
+
+8. Popular o banco automaticamente
+
+```bash
+cd backend
+npx prisma db seed
 ```
 
 9. Inicie o servidor:
