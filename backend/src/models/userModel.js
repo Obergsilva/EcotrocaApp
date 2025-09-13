@@ -24,6 +24,14 @@ const getUserById = async(id_usuario) => {
     });
 }
 
+const findUserByEmail = async(email) => {
+    return prisma.usuario.findUnique({
+        where: {
+            email: email
+        }
+    });
+}
+
 const addUser = (nomeCompleto, email, senhaHash, cidade, bairro) => {
     return prisma.usuario.create({
         data: {
@@ -83,6 +91,7 @@ const deleteUser = async(id_usuario) => {
 module.exports = {
     getAllUsers,
     getUserById,
+    findUserByEmail,
     addUser,
     updateUser,
     deleteUser

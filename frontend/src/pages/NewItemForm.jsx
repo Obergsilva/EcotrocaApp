@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
-import './NewItemForm.css';
+import React, { useState } from "react";
+import "./NewItemForm.css";
+import { addItem } from "../services/itemService";
 
 const NovoItemForm = () => {
   const [formData, setFormData] = useState({
     id: 0,
-    descricao: '',
-    usuarioId: 0,
-    bairro: '',
-    categoriaId: 0,
-    cidade: '',
-    dataPublicacao: '',
-    enderecoRetirada: '',
-    estadoConservacao: '',
-    status: '',
-    titulo: '',
-    urlImagem: ''
+    titulo: "",
+    descricao: "",
+    estadoConservacao: "",
+    urlImagem: null,
+    enderecoRetirada: "",
+    bairro: "",
+    cidade: "",
+    status: "",
+    usuarioId: 1,
+    categoriaId: 1,
   });
+
+  const [error, setError] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'foto') {
+    if (name === "foto") {
       setFormData({ ...formData, urlImagem: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -28,7 +31,43 @@ const NovoItemForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulário enviado:', formData);
+    if (
+      !formData.titulo ||
+      !formData.descricao ||
+      !formData.estadoConservacao ||
+      !formData.cidade ||
+      !formData.bairro ||
+      //!formData.urlImagem ||
+      !formData.status
+    )
+      return alert("Por favor, preencha todos os campos.");
+
+    console.log("Item registrado com sucesso");
+    alert("Item criado com sucesso!");
+
+    const payload = {
+      titulo: formData.titulo,
+      descricao: formData.descricao,
+      estadoConservacao: formData.estadoConservacao,
+      //urlImagem: formData.urlImagem,
+      enderecoRetirada: formData.enderecoRetirada,
+      bairro: formData.bairro,
+      cidade: formData.cidade,
+      usuarioId: formData.usuarioId,
+      categoriaId: formData.categoriaId,
+      status: formData.status,
+    };
+
+    console.log(payload);
+
+    try {
+      setSaving(true);
+      addItem(payload);
+      console.log("Item criado com sucesso!");
+    } catch (error) {
+      setError("Erro ao criar item. Tente novamente.");
+      setSaving(false);
+    }
   };
 
   return (
@@ -41,7 +80,8 @@ const NovoItemForm = () => {
       <form onSubmit={handleSubmit} className="form-grid">
         <div className="form-left">
           <label>
-            <strong>Foto do Item</strong><br />
+            <strong>Foto do Item</strong>
+            <br />
             <input type="file" name="foto" onChange={handleChange} />
             <div className="dica">
               Dicas: Boa iluminação, fundo neutro, item completo.
@@ -138,8 +178,24 @@ const NovoItemForm = () => {
           </label>
 
           <div className="form-buttons">
-            <button type="button" className="btn-cancelar">Cancelar</button>
-            <button type="submit" className="btn btn-success">Publicar Item</button>
+            <button type="button" className="btn-cancelar">
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="btn btn-success"
+              onClick={handleSubmit}
+              disabled={saving}
+            >
+              Publicar Item{" "}
+              {saving && (
+                <span
+                  className="spinner-border spinner-border-sm ms-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              )}
+            </button>
           </div>
         </div>
       </form>
