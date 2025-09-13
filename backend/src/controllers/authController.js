@@ -7,6 +7,7 @@ function signToken(user) {
     {
       id: user.id,
       email: user.email,
+      nomeCompleto: user.nomeCompleto,
     },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
@@ -42,7 +43,6 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  console.log("Corpo recebido no login:", req.body);
   const { email, senha } = req.body;
 
   if (!email || !senha) {
@@ -50,19 +50,26 @@ const login = async (req, res) => {
   }
 
   const user = await findUserByEmail(email);
-  if (!user) {
+
+  if (!user || !user.senhaHash) {
     return res.status(401).json({ error: "Credenciais inválidas" });
   }
 
   const passwordMatch = await bcrypt.compare(senha, user.senhaHash);
   if (!passwordMatch) {
-    return res.status(401).json({ error: "Credenciais inválidas" });
+    return res.status(401).json({ error: "Senha incorreta" });
   }
 
   const token = signToken(user);
-  return res
-    .status(200)
-    .json({ token, user: { id: user.id, email: user.email } });
+
+  return res.json({
+    token,
+    user: {
+      id: user.id,
+      email: user.email,
+      nomeCompleto: user.nomeCompleto,
+    },
+  });
 };
 
 module.exports = {
