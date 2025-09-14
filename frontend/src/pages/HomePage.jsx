@@ -79,7 +79,9 @@ const HomePage = () => {
         {loading ? (
           <p>Carregando itens...</p>
         ) : (
-          items.map((item) => <ItemCard key={item.id} item={item} />)
+          items
+            .slice(0, 8)
+            .map((item) => <ItemCard key={item.id} item={item} />)
         )}
       </div>
     </div>

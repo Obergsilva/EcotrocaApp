@@ -19,7 +19,7 @@ const ItemCard = ({ item }) => {
           </small>
         </div>
         <div className="card-footer bg-transparent border-top-0">
-          <Link to={`/item/${item.id}`} className="btn btn-success w-100">
+          <Link to={`/items/${item.id}`} className="btn btn-success w-100">
             Detalhe do Item
           </Link>
         </div>

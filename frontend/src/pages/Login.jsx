@@ -28,9 +28,10 @@ const Login = () => {
       }
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.user.id);
 
       // redireciona para a página de perfil
-      navigate("/perfil");
+      navigate("/perfil/" + data.user.id);
     } catch (err) {
       console.error("Erro no login:", err);
     }

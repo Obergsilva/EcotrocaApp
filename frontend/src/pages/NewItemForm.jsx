@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./NewItemForm.css";
 import { addItem } from "../services/itemService";
 
 const NovoItemForm = () => {
+  const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    id: 0,
     titulo: "",
     descricao: "",
     estadoConservacao: "",
@@ -12,9 +14,9 @@ const NovoItemForm = () => {
     enderecoRetirada: "",
     bairro: "",
     cidade: "",
-    status: "",
-    usuarioId: 1,
-    categoriaId: 1,
+    status: "DISPONIVEL",
+    usuarioId: parseInt(userId),
+    categoriaId: 0,
   });
 
   const [error, setError] = useState(null);
@@ -36,9 +38,7 @@ const NovoItemForm = () => {
       !formData.descricao ||
       !formData.estadoConservacao ||
       !formData.cidade ||
-      !formData.bairro ||
-      //!formData.urlImagem ||
-      !formData.status
+      !formData.bairro
     )
       return alert("Por favor, preencha todos os campos.");
 
@@ -49,13 +49,12 @@ const NovoItemForm = () => {
       titulo: formData.titulo,
       descricao: formData.descricao,
       estadoConservacao: formData.estadoConservacao,
-      //urlImagem: formData.urlImagem,
+      urlImagem: formData.urlImagem,
       enderecoRetirada: formData.enderecoRetirada,
       bairro: formData.bairro,
       cidade: formData.cidade,
       usuarioId: formData.usuarioId,
-      categoriaId: formData.categoriaId,
-      status: formData.status,
+      categoriaId: parseInt(formData.categoriaId),
     };
 
     console.log(payload);
@@ -64,6 +63,7 @@ const NovoItemForm = () => {
       setSaving(true);
       addItem(payload);
       console.log("Item criado com sucesso!");
+      navigate("/perfil/" + userId);
     } catch (error) {
       setError("Erro ao criar item. Tente novamente.");
       setSaving(false);
@@ -187,14 +187,7 @@ const NovoItemForm = () => {
               onClick={handleSubmit}
               disabled={saving}
             >
-              Publicar Item{" "}
-              {saving && (
-                <span
-                  className="spinner-border spinner-border-sm ms-2"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              )}
+              Publicar Item
             </button>
           </div>
         </div>
