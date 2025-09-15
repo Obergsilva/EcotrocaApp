@@ -2,6 +2,8 @@ import api from "./api";
 
 export const findItems = async () => api.get("/items");
 export const findItemById = async (id) => api.get(`/items/${id}`);
+export const findItemsByBairro = async (bairro) =>
+  api.get(`/items?bairro=${bairro}`);
 export const addItem = async (payload) => api.post("/items", payload);
 export const updateItem = async (id, payload) =>
   api.put(`/items/${id}`, payload);

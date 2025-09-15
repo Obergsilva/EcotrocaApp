@@ -26,6 +26,20 @@ const getItemById = (id_item) => {
   });
 };
 
+//Pegar itens por bairro
+const getItemsByBairro = (bairro) => {
+  return prisma.item.findMany({
+    where: { bairro: { contains: bairro, mode: "insensitive" } },
+    include: {
+      dono: true,
+      categoria: true,
+      propostasOfertadas: true,
+      propostasDesejadas: true,
+    },
+    orderBy: { id: "asc" },
+  });
+};
+
 // Criar novo item
 const addItem = ({
   titulo,
@@ -75,6 +89,7 @@ const deleteItem = async (id_item) => {
 module.exports = {
   getAllItems,
   getItemById,
+  getItemsByBairro,
   addItem,
   updateItem,
   deleteItem,

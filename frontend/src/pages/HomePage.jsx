@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from "react";
 import ItemCard from "../components/ItemCard";
+import { findItems, findItemsByBairro } from "../services/itemService";
 
 const HomePage = () => {
-  const [items, setItems] = useState([
-    {
-      id: 0,
-      titulo: "",
-      descricao: "",
-      estadoConservacao: "",
-      urlImagem: "",
-      dataPublicacao: "",
-      enderecoRetirada: "",
-      bairro: "",
-      cidade: "",
-      status: "",
-    },
-  ]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [bairro, setBairro] = useState("");
+
   useEffect(() => {
-    fetch("http://localhost:3001/api/items")
-      .then((response) => response.json())
-      .then((data) => {
-        setItems(data);
+    const fetchItems = async () => {
+      try {
+        const response = await findItems();
+        setItems(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar itens:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Houve um erro ao buscar os itens:", error);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchItems();
   }, []);
+
+  const handleSearch = async () => {
+    setLoading(true);
+    try {
+      const response = await findItemsByBairro(bairro);
+      setItems(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar itens por bairro:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="container-fluid my-1">
@@ -70,6 +74,17 @@ const HomePage = () => {
             type="text"
             className="form-control"
             placeholder="Digite o bairro..."
+            value={bairro}
+            onChange={(e) => setBairro(e.target.value)}
+          />
+        </div>
+
+        <div className="col-md-auto">
+          <input
+            type="button"
+            className="btn btn-success"
+            value="Buscar"
+            onClick={handleSearch}
           />
         </div>
       </div>
@@ -78,10 +93,10 @@ const HomePage = () => {
       <div className="row">
         {loading ? (
           <p>Carregando itens...</p>
+        ) : Array.isArray(items) ? (
+          items.map((item) => <ItemCard key={item.id} item={item} />)
         ) : (
-          items
-            .slice(0, 8)
-            .map((item) => <ItemCard key={item.id} item={item} />)
+          <p>Nenhum item encontrado</p>
         )}
       </div>
     </div>
