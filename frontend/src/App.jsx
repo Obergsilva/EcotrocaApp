@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
@@ -11,7 +11,8 @@ import ItemDetail from "./pages/ItemDetail";
 
 function App() {
   return (
-    <Router>
+    // Sem <Router> aqui!
+    <>
       <Header />
       <main>
         <Routes>
@@ -19,12 +20,12 @@ function App() {
           <Route path="/cadastrarItem" element={<CadastrarItem />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastrarUsuario" element={<RegisterUser />} />
-          <Route path="/perfil/:id" element={<Perfil />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/item/:id" element={<ItemDetail />} />
         </Routes>
       </main>
       <Footer />
-    </Router>
+    </>
   );
 }
 

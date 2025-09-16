@@ -63,7 +63,7 @@ const NovoItemForm = () => {
       setSaving(true);
       addItem(payload);
       console.log("Item criado com sucesso!");
-      navigate("/perfil/" + userId);
+      navigate("/perfil");
     } catch (error) {
       setError("Erro ao criar item. Tente novamente.");
       setSaving(false);

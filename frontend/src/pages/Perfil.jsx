@@ -1,85 +1,82 @@
-import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import "./Perfil.css";
 import userImage from "../assets/user.png";
-import { findUserById } from "../services/userService"; // Função que busca usuário no backend
+import { findUserById } from "../services/userService";
+import { useAuth } from "../context/authProvider";
+import { useEffect, useState } from "react";
 import ItemCard from "../components/ItemCard";
+import { Link } from "react-router-dom";
 
 const Perfil = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState({
-    id: null,
-    nome: "",
-    email: "",
-    cidade: "",
-    bairro: "",
-    imageUrl: userImage,
-    itens: [],
-    propostas: [],
-  });
+  const { user, token } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("itens");
+  const [proposals, setProposals] = useState([]);
+  const [itens, setItens] = useState([]);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userId = localStorage.getItem("userId"); // supondo que você salva o ID do usuário ao fazer login
-        if (!userId) {
-          navigate("/login"); // se não estiver logado, redireciona
-          return;
-        }
+    if (!user?.id) {
+      return;
+    }
 
-        const response = await findUserById(userId);
-        const data = response.data;
-        setUser({
-          id: data.id,
-          nome: data.nomeCompleto,
-          email: data.email,
-          cidade: data.cidade,
-          bairro: data.bairro,
-          imageUrl: data.imageUrl || userImage,
-          itens: data.itens || [],
-          propostas: data.propostas || [],
-        });
-        setLoading(false);
+    const fetchItens = async () => {
+      setLoading(true);
+      try {
+        const response = await findUserById(user.id);
+
+        setItens(response.data.itens);
+        setProposals(response.data.propostas);
       } catch (error) {
-        console.error("Erro ao buscar usuário:", error);
+        console.error("Erro ao buscar itens:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchUser();
-  }, [navigate]);
+    fetchItens();
+  }, [user?.id]);
 
   return (
     <div className="perfil-container">
       <h1 className="titulo">Meu Perfil</h1>
-
       <div className="perfil-card">
         <div className="usuario-info">
-          <img className="avatar" src={user.imageUrl} alt={user.nome} />
+          <img
+            className="avatar"
+            src={user.imageUrl || userImage}
+            alt={user.nomeCompleto}
+          />
           <div>
-            <div className="nome">{user.nome}</div>
+            <div className="nome">{user.nomeCompleto}</div>
             <div className="email">
-              📍 {user.bairro},<br />
+              📍 {user.bairro} - {user.cidade}
+              <br />
               {user.email}
             </div>
           </div>
         </div>
       </div>
-
+      {/* O resto do seu componente continua igual */}
       <div className="tabs">
-        <button className="tab ativo">
-          📦 Meus Itens ({user.itens.length})
+        <button
+          className={`tab ${activeTab === "itens" ? "ativo" : ""}`}
+          onClick={() => setActiveTab("itens")}
+        >
+          📦 Meus Itens ({itens.length})
         </button>
-        <button className="tab">💬 Propostas ({user.propostas.length})</button>
+        <button
+          className={`tab ${activeTab === "propostas" ? "ativo" : ""}`}
+          onClick={() => setActiveTab("propostas")}
+        >
+          💬 Propostas ({proposals.length})
+        </button>
         <Link className="cadastrar-btn" to="/cadastrarItem">
           + Cadastrar Novo Item
         </Link>
       </div>
-
       <div className="itens-area">
         <div
           className="nenhum-item"
-          style={{ display: user.itens.length ? "none" : "block" }}
+          style={{ display: itens.length ? "none" : "block" }}
         >
           <div className="icone">📦</div>
           <p className="msg">Nenhum item cadastrado</p>
@@ -95,7 +92,7 @@ const Perfil = () => {
           {loading ? (
             <p>Carregando itens...</p>
           ) : (
-            user.itens.map((item) => <ItemCard key={item.id} item={item} />)
+            itens.map((item) => <ItemCard key={item.id} item={item} />)
           )}
         </div>
       </div>

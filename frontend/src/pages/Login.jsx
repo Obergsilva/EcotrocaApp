@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // <- importar
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { useAuth } from "../context/authProvider"; // Importe o useAuth
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const navigate = useNavigate(); // <- criar hook
+  const navigate = useNavigate();
+  const { login } = useAuth(); // Pegue a função login do nosso contexto
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,17 +29,17 @@ const Login = () => {
         return;
       }
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.user.id);
+      // Use a função do contexto para fazer o login!
+      login({ token: data.token, user: data.user });
 
-      // redireciona para a página de perfil
-      navigate("/perfil/" + data.user.id);
+      navigate("/perfil");
     } catch (err) {
       console.error("Erro no login:", err);
     }
   };
 
   return (
+    // ... (o resto do seu componente JSX continua o mesmo)
     <div className="login-container">
       <div className="login-card">
         <h2 className="form-title">FAÇA SEU LOGIN</h2>

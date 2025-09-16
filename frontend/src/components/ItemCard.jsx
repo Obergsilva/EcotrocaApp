@@ -15,7 +15,7 @@ const ItemCard = ({ item }) => {
           <h5 className="card-title">{item.titulo}</h5>
           <p className="card-text text-muted">{item.descricao}</p>
           <small className="text-muted">
-            {item.bairro} {item.cidade}
+            📍 {item.bairro} - {item.cidade}
           </small>
         </div>
         <div className="card-footer bg-transparent border-top-0">

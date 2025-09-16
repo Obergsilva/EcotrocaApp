@@ -68,6 +68,9 @@ const login = async (req, res) => {
       id: user.id,
       email: user.email,
       nomeCompleto: user.nomeCompleto,
+      bairro: user.bairro,
+      cidade: user.cidade,
+      itens: user.itens,
     },
   });
 };
