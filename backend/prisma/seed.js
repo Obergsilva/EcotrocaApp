@@ -57,11 +57,19 @@ async function main() {
     },
   });
 
+  const categoria4 = await prisma.categoria.create({
+    data: {
+      nome: "Outros",
+      descricao: "Outros",
+    },
+  });
+
   console.log(
     "📂 Categorias criadas:",
     categoria1.id,
     categoria2.id,
-    categoria3.id
+    categoria3.id,
+    categoria4.id
   );
 
   // Criar itens

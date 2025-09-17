@@ -1,70 +1,96 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NewItemForm.css";
 import { addItem } from "../services/itemService";
+import { findCategorias } from "../services/categoriaService";
 
 const NovoItemForm = () => {
-  const userId = localStorage.getItem("userId");
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user?.id);
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     titulo: "",
     descricao: "",
     estadoConservacao: "",
-    urlImagem: null,
+    urlImagem: "",
     enderecoRetirada: "",
     bairro: "",
     cidade: "",
     status: "DISPONIVEL",
-    usuarioId: parseInt(userId),
-    categoriaId: 0,
+    usuarioId: user?.id || null,
+    categoriaId: "",
   });
 
   const [error, setError] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "foto") {
-      setFormData({ ...formData, urlImagem: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    const loadCategorias = async () => {
+      try {
+        const res = await findCategorias();
+        setCategorias(res.data); // popula o select
+      } catch (err) {
+        console.error("Erro ao carregar categorias", err);
+      }
+    };
+    loadCategorias();
+  }, []);
+
+  // Converte a imagem para base64
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Limite de 500KB para evitar banco pesado
+    if (file.size > 2000 * 1024) {
+      alert("Imagem muito grande! Máximo de 2MB.");
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData((prev) => ({
+        ...prev,
+        urlImagem: reader.result, // base64
+      }));
+    };
+    reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e) => {
+  // Atualiza campos de texto/select
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !formData.titulo ||
       !formData.descricao ||
       !formData.estadoConservacao ||
       !formData.cidade ||
-      !formData.bairro
-    )
-      return alert("Por favor, preencha todos os campos.");
-
-    console.log("Item registrado com sucesso");
-    alert("Item criado com sucesso!");
-
-    const payload = {
-      titulo: formData.titulo,
-      descricao: formData.descricao,
-      estadoConservacao: formData.estadoConservacao,
-      urlImagem: formData.urlImagem,
-      enderecoRetirada: formData.enderecoRetirada,
-      bairro: formData.bairro,
-      cidade: formData.cidade,
-      usuarioId: formData.usuarioId,
-      categoriaId: parseInt(formData.categoriaId),
-    };
-
-    console.log(payload);
+      !formData.bairro ||
+      !formData.categoriaId
+    ) {
+      return alert("Por favor, preencha todos os campos obrigatórios.");
+    }
 
     try {
       setSaving(true);
-      addItem(payload);
-      console.log("Item criado com sucesso!");
+      await addItem({
+        ...formData,
+        categoriaId: parseInt(formData.categoriaId),
+        usuarioId: parseInt(formData.usuarioId),
+      });
+      alert("Item criado com sucesso!");
       navigate("/perfil");
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       setError("Erro ao criar item. Tente novamente.");
       setSaving(false);
     }
@@ -73,20 +99,25 @@ const NovoItemForm = () => {
   return (
     <div className="form-container">
       <h2>Cadastrar Novo Item</h2>
-      <p>
-        Logado como: <strong></strong>
-      </p>
+      {error && <p className="error">{error}</p>}
 
       <form onSubmit={handleSubmit} className="form-grid">
         <div className="form-left">
           <label>
             <strong>Foto do Item</strong>
             <br />
-            <input type="file" name="foto" onChange={handleChange} />
+            <input type="file" name="foto" onChange={handleFileChange} />
             <div className="dica">
               Dicas: Boa iluminação, fundo neutro, item completo.
             </div>
           </label>
+          {formData.urlImagem && (
+            <img
+              src={formData.urlImagem}
+              alt="Prévia"
+              className="preview-img"
+            />
+          )}
         </div>
 
         <div className="form-right">
@@ -122,10 +153,11 @@ const NovoItemForm = () => {
               required
             >
               <option value="">Selecione uma categoria</option>
-              <option value="1">Eletrônicos</option>
-              <option value="2">Livros</option>
-              <option value="3">Roupas</option>
-              <option value="4">Outros</option>
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.id}>
+                  {categoria.nome}
+                </option>
+              ))}
             </select>
           </label>
 
@@ -178,16 +210,19 @@ const NovoItemForm = () => {
           </label>
 
           <div className="form-buttons">
-            <button type="button" className="btn-cancelar">
+            <button
+              type="button"
+              className="btn-cancelar"
+              onClick={() => navigate("/perfil")}
+            >
               Cancelar
             </button>
             <button
               type="submit"
               className="btn btn-success"
-              onClick={handleSubmit}
               disabled={saving}
             >
-              Publicar Item
+              {saving ? "Salvando..." : "Publicar Item"}
             </button>
           </div>
         </div>

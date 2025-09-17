@@ -117,7 +117,7 @@ O servidor será executado em `http://localhost:3001`
 
 ```bash
 cd frontend
-npm start
+npm run dev
 ```
 
 A aplicação será aberta automaticamente em `http://localhost:5173`
