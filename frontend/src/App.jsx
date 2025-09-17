@@ -8,6 +8,10 @@ import RegisterUser from "./pages/RegisterUser";
 import Perfil from "./pages/Perfil";
 import Footer from "./components/Footer";
 import ItemDetail from "./pages/ItemDetail";
+import ProporTroca from "./pages/ProporTroca";
+
+
+
 
 function App() {
   return (
@@ -22,6 +26,7 @@ function App() {
           <Route path="/cadastrarUsuario" element={<RegisterUser />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/item/:id" element={<ItemDetail />} />
+          <Route path="/propor/:id" element={<ProporTroca />} />
         </Routes>
       </main>
       <Footer />
