@@ -1,37 +1,75 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { findItemById } from "../services/itemService";
+import {findUserById} from "../services/userService"
+import { useAuth } from "../context/authProvider";
+import { addProposal } from "../services/propostaService";
 import "./ItemDetail.css";
 
 const ItemDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //ID do item
+  const { user } = useAuth()
   const navigate = useNavigate();
-  const [item, setItem] = useState(null);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [meusItens, setMeusItens] = useState([]);
+  const [itemSelecionado, setItemSelecionado] = useState("");
 
   useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`http://localhost:3001/items/${id}`);
-        
-        if (!response.ok) {
-          throw new Error('Item não encontrado');
+      const fetchItems = async () => {
+        try {
+          const response = await findItemById(id);
+          setItems(response.data);
+          
+        } catch (error) {
+          console.error("Erro ao buscar itens:", error);
+        } finally {
+          setLoading(false);
         }
-        
-        const data = await response.json();
-        setItem(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
+  
+      fetchItems();
+    }, []);
 
-    if (id) {
-      fetchItem();
+  const handleProposta = async () => {
+    try {
+      const response = await findUserById(user.id);
+      
+      setMeusItens(response.data.itens);
+      
+      setShowModal(true);
+    } catch (error) {
+      console.error("Erro ao buscar seus itens:", error);
     }
-  }, [id]);
+  };
+
+  const enviarProposta = async (e) => {
+    console.log(id)
+    console.log(meusItens)
+    e.preventDefault();
+    if (meusItens.some((item) => item.id === parseInt(id))) {
+      alert("Escolha um item de outra pessoa para trocar");
+    return;
+}
+    
+    const propostaPayload = {
+      mensagem: "Gostaria de trocar esse item?",
+      autorId: parseInt(user.id),
+      itemOfertadoId: parseInt(itemSelecionado),
+      itemDesejadoId: parseInt(id),
+    };
+    try {
+      await addProposal(propostaPayload)
+      alert("Proposta enviada com sucesso!");
+      setShowModal(false);
+    } catch (error) {
+      console.error("Erro ao enviar proposta:", error);
+    }
+  };
+
+
 
   const handleBack = () => {
     navigate('/');
@@ -45,7 +83,7 @@ const ItemDetail = () => {
     return <div className="error">Erro: {error}</div>;
   }
 
-  if (!item) {
+  if (!items) {
     return <div className="error">Item não encontrado.</div>;
   }
 
@@ -56,37 +94,61 @@ const ItemDetail = () => {
 
       <div className="item-content">
         <img
-          src={item.imageUrl}
-          alt={item.title}
+          src={items.urlImagem}
+          alt={items.titulo}
           className="item-imagem"
         />
 
         <div className="item-info">
-          <h1 className="item-titulo">{item.title}</h1>
+          <h1 className="item-titulo">{items.titulo}</h1>
 
           <div className="tags">
-            <span className="tag-categoria">{item.category}</span>
-            {item.condition && <span className="tag-estado">{item.condition}</span>}
+            {items.estadoConservacao && <span className="tag-estado">{items.estadoConservacao}</span>}
           </div>
 
-          <div className="localizacao">📍 {item.neighborhood}, {item.city}</div>
+          <div className="localizacao">📍 {items.bairro}, {items.cidade}</div>
 
           <h3>Descrição</h3>
           <p className="descricao">
-            {item.description}
+            {items.descricao}
           </p>
 
           <div className="autor-card">
             <div className="autor-avatar">👤</div>
             <div>
-              <strong>{item.owner || 'Usuário'}</strong>
-              <div className="publicado">Publicado em {item.publishedDate || 'Data não disponível'}</div>
+              <strong>{items.dono.nomeCompleto || 'Usuário'}</strong>
+              <div className="publicado">Publicado em {items.dataPublicacao || 'Data não disponível'}</div>
             </div>
           </div>
 
-          <button className="propor-btn">💬 Propor Troca</button>
+          <button className="propor-btn" onClick={handleProposta}>💬 Propor Troca</button>
         </div>
       </div>
+      {showModal && (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <h2>Selecione um item para troca</h2>
+          <select
+            value={itemSelecionado}
+            onChange={(e) => setItemSelecionado(e.target.value)}
+          >
+            <option value="">Selecione</option>
+            {meusItens.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.titulo}
+              </option>
+            ))}
+          </select>
+          <div className="modal-actions">
+            <button onClick={enviarProposta} disabled={!itemSelecionado}>
+              Enviar Proposta
+            </button>
+            <button onClick={() => setShowModal(false)}>Cancelar</button>
+          </div>
+        </div>
+      </div>
+    )}
+
     </div>
   );
 };

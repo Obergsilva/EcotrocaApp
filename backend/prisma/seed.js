@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
+const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
+
 
 async function main() {
   console.log("🌱 Iniciando seed do banco...");
@@ -12,12 +14,14 @@ async function main() {
 
   console.log("🗑️ Tabelas limpas!");
 
+  const senha = '123456'; // senha padrão
+  const senhaHash = await bcrypt.hash(senha, 10);
   // Criar usuários
   const usuario1 = await prisma.usuario.create({
     data: {
       nomeCompleto: "Maria Souza",
       email: "maria@example.com",
-      senhaHash: "123456", // só exemplo, não use em produção!
+      senhaHash,
       cidade: "Fortaleza",
       bairro: "Aldeota",
     },
@@ -27,7 +31,7 @@ async function main() {
     data: {
       nomeCompleto: "João Silva",
       email: "joao@example.com",
-      senhaHash: "abcdef",
+      senhaHash,
       cidade: "Fortaleza",
       bairro: "Centro",
     },
@@ -38,39 +42,66 @@ async function main() {
   // Criar categorias
   const categoria1 = await prisma.categoria.create({
     data: {
-      nome: "Eletrônicos",
-      descricao: "Celulares, notebooks e dispositivos em geral",
+      nome: "Eletrônicos e Tecnologia",
+      descricao: "Celulares e tablets; Notebooks e periféricos; TVs e monitores; Games e consoles",
     },
   });
 
   const categoria2 = await prisma.categoria.create({
     data: {
-      nome: "Livros",
-      descricao: "Didáticos, literatura e revistas",
+      nome: "Itens para Casa",
+      descricao: "Móveis; Eletrodomésticos; Decoração; Utensílios domésticos",
     },
   });
 
   const categoria3 = await prisma.categoria.create({
     data: {
-      nome: "Roupas",
-      descricao: "Camisas, calças e acessórios",
+      nome: "Moda e Acessórios",
+      descricao: "Roupas femininas, masculinas e infantis; Calçados; Bolsas e mochilas; Bijuterias e acessórios",
     },
   });
 
   const categoria4 = await prisma.categoria.create({
     data: {
+      nome: "Cultura e Educação",
+      descricao: "Livros e revistas; Material escolar; Instrumentos musicais; Brinquedos educativos",
+    },
+  });
+
+  const categoria5 = await prisma.categoria.create({
+    data: {
+      nome: "Infantil",
+      descricao: "Roupas de bebê; Brinquedos; Carrinhos e cadeirinhas; Produtos de maternidade",
+    },
+  });
+
+  const categoria6 = await prisma.categoria.create({
+    data: {
+      nome: "Ferramentas e Jardinagem",
+      descricao: "Ferramentas manuais e elétricas; Equipamentos de jardinagem; Vasos e plantas; Materiais de construção",
+    },
+  });
+
+  const categoria7 = await prisma.categoria.create({
+    data: {
+      nome: "Pets",
+      descricao: "Rações e petiscos; Brinquedos para pets; Camas e casinhas; Acessórios",
+    },
+  });
+
+  const categoria8 = await prisma.categoria.create({
+    data: {
+      nome: "Higiene e Beleza",
+      descricao: "Cosméticos; Produtos de cuidados pessoais; Perfumes; Maquiagem",
+    },
+  });
+
+  const categoria9 = await prisma.categoria.create({
+    data: {
       nome: "Outros",
       descricao: "Outros",
     },
   });
-
-  console.log(
-    "📂 Categorias criadas:",
-    categoria1.id,
-    categoria2.id,
-    categoria3.id,
-    categoria4.id
-  );
 
   // Criar itens
   const item1 = await prisma.item.create({
@@ -99,7 +130,7 @@ async function main() {
       bairro: "Centro",
       cidade: "Fortaleza",
       usuarioId: usuario2.id,
-      categoriaId: categoria2.id,
+      categoriaId: categoria4.id,
     },
   });
 
@@ -110,8 +141,8 @@ async function main() {
       estadoConservacao: "Ótimo",
       urlImagem:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzCLTClyJxqWEf7lo12kk_FDZIKhayBe_Bbw&s",
-      enderecoRetirada: "Rua Mario Mamede, 123",
-      bairro: "Aldeota",
+      enderecoRetirada: "Rua Major Facundo, 456",
+      bairro: "Centro",
       cidade: "Fortaleza",
       usuarioId: usuario2.id,
       categoriaId: categoria2.id,
@@ -130,7 +161,7 @@ async function main() {
       bairro: "Centro",
       cidade: "Fortaleza",
       usuarioId: usuario2.id,
-      categoriaId: categoria2.id,
+      categoriaId: categoria1.id,
     },
   });
 

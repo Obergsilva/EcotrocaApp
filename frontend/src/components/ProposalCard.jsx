@@ -35,7 +35,7 @@ const ProposalCard = ({ proposal }) => {
           <div>
             <h5 className="card-title mb-1">
               Proposta para:{" "}
-              <Link to={`/item/${itemDesejado?.id}`}>
+              <Link to={`/items/${itemDesejado?.id}`}>
                 {itemDesejado?.titulo || "Item indisponível"}
               </Link>
             </h5>

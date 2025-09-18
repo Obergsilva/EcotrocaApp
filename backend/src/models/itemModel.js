@@ -1,8 +1,16 @@
 const prisma = require("../prisma"); // importa o PrismaClient
 
 // Pegar todos os itens
-const getAllItems = () => {
+const getAllItems = (query = {}) => {
   return prisma.item.findMany({
+    where: {
+      ...(query.bairro && {
+        bairro: { contains: query.bairro, mode: "insensitive" },
+      }),
+      ...(query.categoriaId && {
+        categoriaId: parseInt(query.categoriaId),
+      }),
+    },
     include: {
       dono: true,
       categoria: true,
@@ -12,6 +20,7 @@ const getAllItems = () => {
     orderBy: { id: "asc" },
   });
 };
+
 
 // Pegar item por ID
 const getItemById = (id_item) => {

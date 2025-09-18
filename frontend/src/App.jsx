@@ -25,8 +25,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastrarUsuario" element={<RegisterUser />} />
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/item/:id" element={<ItemDetail />} />
-          <Route path="/propor/:id" element={<ProporTroca />} />
+          <Route path="/items/:id" element={<ItemDetail />} />
+          <Route path="/propor/items/:id" element={<ProporTroca />} />
         </Routes>
       </main>
       <Footer />

@@ -4,14 +4,15 @@ const itemService = require("../models/itemModel");
 
 // GET todos os itens
 router.get("/", async (req, res) => {
-  const { bairro } = req.query;
+  const { bairro, categoria } = req.query;
 
-  if (bairro) {
-    const items = await itemService.getItemsByBairro(bairro);
-    return res.json(items);
-  }
-  const items = await itemService.getAllItems();
-  res.json(items);
+  let query = {};
+
+  if (bairro) query.bairro = bairro;
+  if (categoria) query.categoriaId = categoria;
+
+  const itensFiltrados = await itemService.getAllItems(query);
+  res.json(itensFiltrados);
 });
 
 // GET item por ID

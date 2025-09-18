@@ -42,7 +42,6 @@ const RegisterUser = () => {
       !form.confirmarSenha
     )
       return alert("Por favor, preencha todos os campos.");
-    console.log("Usuário registrado com sucesso");
     alert("Conta criada com sucesso!");
     navigate("/login");
 
