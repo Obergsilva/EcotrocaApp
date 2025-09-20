@@ -2,11 +2,12 @@ import api from "./api";
 
 export const findItems = async () => api.get("/items");
 export const findItemById = async (id) => api.get(`/items/${id}`);
-export const findItemsByFiltro = async ({ bairro, categoria }) => {
+export const findItemsByFiltro = async ({ bairro, categoria, titulo }) => {
   const params = new URLSearchParams();
 
   if (bairro) params.append("bairro", bairro);
   if (categoria) params.append("categoria", categoria);
+  if (titulo) params.append("titulo", titulo)
 
   return api.get(`/items?${params.toString()}`);
 };

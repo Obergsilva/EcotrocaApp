@@ -1,0 +1,7 @@
+/* Arquivo: ProposalCard.css */
+
+.proposal-item-img {
+  max-height: 150px; /* Define uma altura máxima para a imagem */
+  width:30%;       /* Faz a largura ocupar todo o espaço do card */
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+}

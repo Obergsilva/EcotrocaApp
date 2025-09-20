@@ -14,13 +14,22 @@ const getAllUsers = () => {
 
 const getUserById = async (id_usuario) => {
   return prisma.usuario.findUnique({
-    where: {
-      id: id_usuario,
+     where: { id: id_usuario },
+     include: {
+    itens: true,
+    propostas: true, // propostas feitas pelo usuário
+    itens: {
+      include: {
+        propostasDesejadas: {
+          include: {
+            autor: true,
+            itemOfertado: true,
+            itemDesejado: true,
+          },
+        },
+      },
     },
-    include: {
-      itens: true,
-      propostas: true,
-    },
+  },
   });
 };
 

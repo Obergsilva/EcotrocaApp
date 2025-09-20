@@ -4,6 +4,9 @@ const prisma = require("../prisma"); // importa o PrismaClient
 const getAllItems = (query = {}) => {
   return prisma.item.findMany({
     where: {
+      ...(query.titulo && {
+        titulo: { contains: query.titulo, mode: "insensitive" },
+      }),
       ...(query.bairro && {
         bairro: { contains: query.bairro, mode: "insensitive" },
       }),

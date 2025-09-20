@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// Adicione um arquivo CSS para estilização customizada se desejar
+import "./ProposalCard.css"; 
 
 // Função para formatar a data para o padrão brasileiro (dd/mm/yyyy)
 const formatDate = (dateString) => {
@@ -17,6 +19,8 @@ const getStatusBadgeClass = (status) => {
       return "bg-success";
     case "RECUSADA":
       return "bg-danger";
+    case "CANCELADA":
+      return "bg-secondary";
     default:
       return "bg-secondary";
   }
@@ -26,50 +30,77 @@ const ProposalCard = ({ proposal }) => {
   const { status, itemOfertado, itemDesejado, autor, dataProposta } = proposal;
 
   return (
-    // O card principal, com uma sombra leve
-    <div className="card shadow-sm mb-3">
+    <div className="card shadow-sm mb-4 border-0 rounded-3 proposal-card">
       <div className="card-body">
-        {/* Usamos flexbox para alinhar o conteúdo principal à esquerda e o status à direita */}
-        <div className="d-flex justify-content-between align-items-start">
-          {/* Parte Esquerda: Detalhes da Proposta */}
+        <div className="d-flex justify-content-between align-items-start mb-3">
           <div>
-            <h5 className="card-title mb-1">
-              Proposta para:{" "}
-              <Link to={`/items/${itemDesejado?.id}`}>
-                {itemDesejado?.titulo || "Item indisponível"}
-              </Link>
+            <h5 className="card-title mb-2 fw-semibold text-success">
+              {autor?.nomeCompleto || "Usuário desconhecido"} enviou uma proposta:
             </h5>
-            <p className="card-text mb-1">
-              <small className="text-muted">
-                De: {autor?.nomeCompleto || "Usuário desconhecido"}
-              </small>
-            </p>
-            <p className="card-text">
-              Oferece em troca:{" "}
-              <Link to={`/item/${itemOfertado?.id}`}>
-                {itemOfertado?.titulo || "Item indisponível"}
-              </Link>
-            </p>
           </div>
 
-          {/* Parte Direita: Status da Proposta */}
+          {/* Status da proposta */}
           <div>
-            <span className={`badge ${getStatusBadgeClass(status)}`}>
+            <span className={`badge ${getStatusBadgeClass(status)} px-3 py-2`}>
               {status}
             </span>
           </div>
         </div>
+
+        {/* Mini cards dos itens */}
+        <div className="row">
+          {/* Item desejado */}
+          <div className="col-md-6 mb-3">
+            <div className="card h-100 border-danger">
+              <div className="card-body text-center d-flex flex-column justify-content-between">
+                <div>
+                  <h6 className="fw-bold text-danger">Você Entrega</h6>
+                  {itemDesejado?.urlImagem && (
+                    <img
+                      src={itemDesejado.urlImagem}
+                      alt={itemDesejado.titulo}
+                      className="img-fluid rounded my-2 proposal-item-img"
+                    />
+                  )}
+                </div>
+                <Link to={`/items/${itemDesejado?.id}`} className="text-decoration-none text-danger">
+                  <p className="mb-1 fw-bold">{itemDesejado?.titulo || "Item indisponível"}</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Item ofertado */}
+          <div className="col-md-6 mb-3">
+            <div className="card h-100 border-success">
+              <div className="card-body text-center d-flex flex-column justify-content-between">
+                <div>
+                  <h6 className="fw-bold text-success">Você Recebe</h6>
+                  {itemOfertado?.urlImagem && (
+                     <img
+                      src={itemOfertado.urlImagem}
+                      alt={itemOfertado.titulo}
+                      className="img-fluid rounded my-2 proposal-item-img" 
+                    />
+                  )}
+                </div>
+                <Link to={`/items/${itemOfertado?.id}`} className="text-decoration-none text-success">
+                  <p className="mb-1 fw-bold">{itemOfertado?.titulo || "Item indisponível"}</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Rodapé do Card */}
+      {/* Rodapé */}
       <div className="card-footer bg-light d-flex justify-content-between align-items-center">
-        <small className="text-muted">Data: {formatDate(dataProposta)}</small>
+        <small className="text-muted">📅 {formatDate(dataProposta)}</small>
 
-        {/* Mostra os botões apenas se a proposta estiver pendente */}
         {status === "PENDENTE" && (
           <div>
-            <button className="btn btn-success btn-sm me-2">Aceitar</button>
-            <button className="btn btn-danger btn-sm">Recusar</button>
+            <button className="btn btn-sm btn-outline-success me-2">✅ Aceitar</button>
+            <button className="btn btn-sm btn-outline-danger">❌ Recusar</button>
           </div>
         )}
       </div>

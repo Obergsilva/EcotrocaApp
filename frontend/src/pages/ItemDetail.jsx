@@ -72,7 +72,7 @@ const ItemDetail = () => {
 
 
   const handleBack = () => {
-    navigate('/');
+    navigate('/Perfil');
   };
 
   if (loading) {
@@ -90,7 +90,7 @@ const ItemDetail = () => {
 
   return (
     <div className="item-container">
-      <button className="voltar" onClick={handleBack}>← Voltar para busca</button>
+      <button className="voltar" onClick={handleBack}>← Voltar</button>
 
       <div className="item-content">
         <img

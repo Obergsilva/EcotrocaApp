@@ -35,17 +35,17 @@ const Header = () => {
                 Início
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="btn btn-outline-success" to="/cadastrarItem">
-                Cadastrar Item
-              </Link>
-            </li>
             {/* 3. Lógica condicional */}
             {user ? (
               <>
                 <li className="nav-item">
                   <Link className="btn btn-outline-success" to="/perfil">
                     Perfil
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="btn btn-outline-success" to="/cadastrarItem">
+                    Cadastrar Item
                   </Link>
                 </li>
                 <li className="nav-item">

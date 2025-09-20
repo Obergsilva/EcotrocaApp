@@ -1,7 +1,6 @@
 import "./Perfil.css";
 import userImage from "../assets/user.png";
 import { findUserById } from "../services/userService";
-import { findItemById } from "../services/itemService";
 import { useAuth } from "../context/authProvider";
 import { useEffect, useState } from "react";
 import ItemCard from "../components/ItemCard";
@@ -13,52 +12,35 @@ const Perfil = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("itens");
   const [itens, setItens] = useState([]);
-  const [hydratedProposals, setHydratedProposals] = useState([]);
+  const [receivedProposals, setReceivedProposals] = useState([]);
 
   useEffect(() => {
     if (!user?.id) return;
-
-    const hydrateProposals = async (proposals) => {
-      const proposalPromises = proposals.map(async (proposal) => {
-        try {
-          const [itemOfertadoRes, itemDesejadoRes] = await Promise.all([
-            findItemById(proposal.itemOfertadoId),
-            findItemById(proposal.itemDesejadoId),
-          ]);
-          return {
-            ...proposal,
-            itemOfertado: itemOfertadoRes.data,
-            itemDesejado: itemDesejadoRes.data,
-            autor: user,
-          };
-        } catch (error) {
-          console.error(
-            `Erro ao carregar detalhes da proposta ${proposal.id}:`,
-            error
-          );
-          return null;
-        }
-      });
-      const resolvedProposals = await Promise.all(proposalPromises);
-      setHydratedProposals(resolvedProposals.filter((p) => p !== null));
-      setLoading(false);
-    };
 
     const fetchInitialData = async () => {
       setLoading(true);
       try {
         const response = await findUserById(user.id);
         const userData = response.data;
+
+        // itens do usuário
         setItens(userData.itens);
-        await hydrateProposals(userData.propostas);
+
+        // juntar todas as propostas recebidas nos itens do usuário
+        const proposals = userData.itens.flatMap(
+          (item) => item.propostasDesejadas || []
+        );
+
+        setReceivedProposals(proposals);
       } catch (error) {
         console.error("Erro ao buscar dados do perfil:", error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchInitialData();
-  }, [user?.id, user]);
+  }, [user?.id]);
 
   if (!user) {
     return <div>Carregando perfil...</div>;
@@ -97,7 +79,7 @@ const Perfil = () => {
           className={`tab ${activeTab === "propostas" ? "ativo" : ""}`}
           onClick={() => setActiveTab("propostas")}
         >
-          💬 Propostas ({hydratedProposals.length})
+          💬 Propostas ({receivedProposals.length})
         </button>
         <Link className="cadastrar-btn" to="/cadastrarItem">
           + Cadastrar Novo Item
@@ -136,8 +118,8 @@ const Perfil = () => {
         <div style={{ display: activeTab === "propostas" ? "block" : "none" }}>
           {loading ? (
             <p>Carregando propostas...</p>
-          ) : hydratedProposals.length > 0 ? (
-            hydratedProposals.map((proposal) => (
+          ) : receivedProposals.length > 0 ? (
+            receivedProposals.map((proposal) => (
               <ProposalCard key={proposal.id} proposal={proposal} />
             ))
           ) : (

@@ -12,6 +12,7 @@ const HomePage = () => {
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
   const [bairro, setBairro] = useState("");
+  const [titulo, setTitulo] = useState("")
 
   useEffect(() => {
     fetchItems();
@@ -44,6 +45,7 @@ const HomePage = () => {
     const response = await findItemsByFiltro({
       bairro,
       categoria: categoriaSelecionada,
+      titulo
     });
 
     setItems(response.data);
@@ -74,6 +76,9 @@ const HomePage = () => {
             type="text"
             className="form-control"
             placeholder="O que você está procurando?"
+            value={items.titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            onKeyDown={handleSearch}
           />
         </div>
       </div>
