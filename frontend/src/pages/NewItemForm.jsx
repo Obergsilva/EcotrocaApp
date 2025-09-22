@@ -45,8 +45,8 @@ const NovoItemForm = () => {
     if (!file) return;
 
     // Limite de 500KB para evitar banco pesado
-    if (file.size > 2000 * 1024) {
-      alert("Imagem muito grande! Máximo de 2MB.");
+    if (file.size > 1000 * 1024) {
+      alert("Imagem muito grande! Máximo de 1MB.");
       return;
     }
 

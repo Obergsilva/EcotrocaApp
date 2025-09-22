@@ -67,3 +67,14 @@ textarea {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.preview-img {
+  width: 350px;       /* largura fixa */
+  height: 400px;      /* altura fixa */
+  object-fit: contain; /* mostra a imagem inteira */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  display: block;
+  background-color: #f5f5f5; /* fundo para preencher quando sobrar espaço */
+}
